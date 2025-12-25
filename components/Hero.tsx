@@ -1,9 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { ArrowDown } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+
+const images = [
+  "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=2500&auto=format&fit=crop",
+  "/hero/wood1.png",
+  "/hero/wood2.png",
+  "/hero/wood3.png",
+  "/hero/wood4.png",
+  "/hero/wood5.png"
+];
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -14,6 +24,14 @@ const Hero: React.FC = () => {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section 
       ref={containerRef} 
@@ -22,15 +40,23 @@ const Hero: React.FC = () => {
       {/* Parallax Background Layer */}
       <motion.div 
         style={{ y, scale }}
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 bg-stone-900"
       >
-        <img 
-          src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?q=80&w=2500&auto=format&fit=crop" 
-          alt="Luxury Interior Background" 
-          className="w-full h-full object-cover"
-        />
+        <AnimatePresence mode="popLayout">
+          <motion.img 
+            key={currentImageIndex}
+            src={images[currentImageIndex]}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            alt="Luxury Woodwork Interior" 
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </AnimatePresence>
+        
         {/* Dark overlay to ensure text legibility */}
-        <div className="absolute inset-0 bg-stone-900/40"></div>
+        <div className="absolute inset-0 bg-stone-900/40 z-10"></div>
       </motion.div>
 
       {/* Content */}

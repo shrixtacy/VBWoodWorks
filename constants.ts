@@ -8,13 +8,14 @@ export const NAV_LINKS = [
 ];
 
 // Placeholder images using nature/wood themes to simulate furniture/interiors
-export const SERVICES: Service[] = [
+export const SERVICES: (Service & { path: string })[] = [
   {
     id: 'educational',
     title: 'Educational Furniture',
     description: 'Inspiring minds through ergonomic design.',
     details: 'We craft durable, ergonomic, and inspiring furniture solutions for schools, universities, and libraries. Our designs foster collaboration and comfort, ensuring conducive learning environments.',
     imageUrl: 'https://picsum.photos/id/20/1200/1600', // Desk/workplace vibe
+    path: '/educational-furniture'
   },
   {
     id: 'office',
@@ -22,6 +23,7 @@ export const SERVICES: Service[] = [
     description: 'Productivity meets elegance.',
     details: 'From executive suites to collaborative hubs, our office furniture merges functionality with high-end aesthetics. We use premium hardwoods and sustainable materials to define your corporate identity.',
     imageUrl: 'https://picsum.photos/id/180/1200/1600', // Office/study vibe
+    path: '/office-furniture'
   },
   {
     id: 'home',
@@ -29,6 +31,7 @@ export const SERVICES: Service[] = [
     description: 'Warmth and sophistication for your sanctuary.',
     details: 'Bespoke living room, bedroom, and dining sets designed to fit your space perfectly. Every curve and joint is hand-finished to ensure heirloom quality that lasts generations.',
     imageUrl: 'https://picsum.photos/id/369/1200/1600', // Home interior vibe
+    path: '/home-furniture'
   },
   {
     id: 'interior',
@@ -36,6 +39,7 @@ export const SERVICES: Service[] = [
     description: 'Holistic spatial transformation.',
     details: 'Complete interior fit-outs including wall paneling, flooring, and custom cabinetry. We transform bare shells into warm, inviting, and functionally superior spaces.',
     imageUrl: 'https://picsum.photos/id/437/1200/1600', // Abstract interior
+    path: '/interior-solutions'
   },
   {
     id: 'artefacts',
@@ -43,6 +47,7 @@ export const SERVICES: Service[] = [
     description: 'Details that define character.',
     details: 'Hand-carved wooden sculptures, decorative panels, and unique accent pieces. These artefacts serve as the soul of the room, adding a layer of artistic depth to any environment.',
     imageUrl: 'https://picsum.photos/id/250/1200/1600', // Texture/camera detail
+    path: '/artefacts'
   },
 ];
 
