@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Marquee from './components/Marquee';
-import About from './components/About';
-import StickyServices from './components/StickyServices';
-import Process from './components/Process';
-import Portfolio from './components/Portfolio';
-import Testimonials from './components/Testimonials';
-import CallToAction from './components/CallToAction';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
+import Home from './components/Home';
+import ServicePage from './components/ServicePage';
+
+// ScrollToTop component to handle scroll reset on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 function App() {
   useEffect(() => {
@@ -34,20 +38,64 @@ function App() {
   }, []);
 
   return (
-    <div className="antialiased text-stone-900 bg-luxury-50 selection:bg-stone-800 selection:text-luxury-50">
-      <Navbar />
-      <main className="relative z-10">
-        <Hero />
-        <Marquee />
-        <About />
-        <StickyServices />
-        <Process />
-        <Portfolio />
-        <Testimonials />
-        <CallToAction />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <ScrollToTop />
+      <div className="antialiased text-stone-900 bg-luxury-50 selection:bg-stone-800 selection:text-luxury-50">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/educational-furniture"
+            element={
+              <ServicePage
+                title="Educational Furniture"
+                description="Inspiring minds through ergonomic design."
+                backgroundImage="/hero/wood1.png"
+              />
+            }
+          />
+          <Route
+            path="/office-furniture"
+            element={
+              <ServicePage
+                title="Office Furniture"
+                description="Productivity meets elegance."
+                backgroundImage="/hero/wood2.png"
+              />
+            }
+          />
+          <Route
+            path="/home-furniture"
+            element={
+              <ServicePage
+                title="Home Furniture"
+                description="Warmth and sophistication for your sanctuary."
+                backgroundImage="/hero/wood3.png"
+              />
+            }
+          />
+          <Route
+            path="/interior-solutions"
+            element={
+              <ServicePage
+                title="Interior Solutions"
+                description="Holistic spatial transformation."
+                backgroundImage="/hero/wood4.png"
+              />
+            }
+          />
+          <Route
+            path="/artefacts"
+            element={
+              <ServicePage
+                title="Artefacts"
+                description="Details that define character."
+                backgroundImage="/hero/wood5.png"
+              />
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
