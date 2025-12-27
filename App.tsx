@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Lenis from 'lenis';
 import Home from './components/Home';
 import ServicePage from './components/ServicePage';
+import { SERVICES } from './constants';
 
 // ScrollToTop component to handle scroll reset on route change
 const ScrollToTop = () => {
@@ -14,6 +15,15 @@ const ScrollToTop = () => {
 
   return null;
 };
+
+// Map wood types to service IDs for consistent styling
+const WOOD_TYPES = {
+  'educational': 'oak',
+  'office': 'walnut',
+  'home': 'teak',
+  'interior': 'mahogany',
+  'artefacts': 'pine'
+} as const;
 
 function App() {
   useEffect(() => {
@@ -43,61 +53,25 @@ function App() {
       <div className="antialiased text-stone-900 bg-luxury-50 selection:bg-stone-800 selection:text-luxury-50">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/educational-furniture"
-            element={
-              <ServicePage
-                title="Educational Furniture"
-                description="Inspiring minds through ergonomic design."
-                backgroundImage="/backgrounds/wood1.jpg"
-                woodType="oak"
+          {SERVICES.map((service, index) => (
+            service.path && (
+              <Route
+                key={service.id}
+                path={service.path}
+                element={
+                  <ServicePage
+                    title={service.title}
+                    description={service.description}
+                    backgroundImage={`/backgrounds/wood${index + 1}.jpg`}
+                    woodType={WOOD_TYPES[service.id as keyof typeof WOOD_TYPES] || 'oak'}
+                    subCategories={service.subCategories}
+                    features={service.features}
+                    process={service.process}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/office-furniture"
-            element={
-              <ServicePage
-                title="Office Furniture"
-                description="Productivity meets elegance."
-                backgroundImage="/backgrounds/wood2.jpg"
-                woodType="walnut"
-              />
-            }
-          />
-          <Route
-            path="/home-furniture"
-            element={
-              <ServicePage
-                title="Home Furniture"
-                description="Warmth and sophistication for your sanctuary."
-                backgroundImage="/backgrounds/wood3.jpg"
-                woodType="teak"
-              />
-            }
-          />
-          <Route
-            path="/interior-solutions"
-            element={
-              <ServicePage
-                title="Interior Solutions"
-                description="Holistic spatial transformation."
-                backgroundImage="/backgrounds/wood4.jpg"
-                woodType="mahogany"
-              />
-            }
-          />
-          <Route
-            path="/artefacts"
-            element={
-              <ServicePage
-                title="Artefacts"
-                description="Details that define character."
-                backgroundImage="/backgrounds/wood5.jpg"
-                woodType="pine"
-              />
-            }
-          />
+            )
+          ))}
         </Routes>
       </div>
     </Router>
