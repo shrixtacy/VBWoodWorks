@@ -9,23 +9,36 @@ interface ServicePageProps {
     title: string;
     description: string;
     backgroundImage: string;
+    woodType?: 'oak' | 'walnut' | 'teak' | 'mahogany' | 'pine';
 }
 
-const ServicePage: React.FC<ServicePageProps> = ({ title, description, backgroundImage }) => {
+const ServicePage: React.FC<ServicePageProps> = ({ title, description, backgroundImage, woodType = 'oak' }) => {
+    // CSS filters to simulate different wood types from a base texture
+    const filters: Record<string, string> = {
+        oak: 'none', // Natural
+        walnut: 'brightness(0.7) sepia(0.3) contrast(1.1)', // Darker, richer
+        teak: 'sepia(0.4) saturate(1.2) brightness(0.9)', // Golden brown
+        mahogany: 'sepia(0.3) hue-rotate(-30deg) saturate(1.4) brightness(0.8)', // Reddish
+        pine: 'brightness(1.1) saturate(0.8) sepia(0.2)', // Lighter, yellowish
+    };
+
     return (
         <div className="min-h-screen flex flex-col bg-stone-900 text-stone-100">
             <Navbar />
 
             <main className="flex-grow relative">
                 {/* Background Image Layer */}
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-stone-900/40 z-10" />
-                    <img
-                        src={backgroundImage}
-                        alt="Wood Background"
-                        className="w-full h-full object-cover"
-                    />
-                </div>
+                <div
+                    className="fixed inset-0 z-0 bg-repeat"
+                    style={{
+                        backgroundImage: `url(${backgroundImage})`,
+                        backgroundSize: '800px', // Reasonable size for texture detail
+                        filter: filters[woodType],
+                    }}
+                />
+
+                {/* Overlay for legibility */}
+                <div className="fixed inset-0 bg-stone-900/60 z-10" />
 
                 {/* Content */}
                 <div className="relative z-20 container mx-auto px-6 py-32 md:py-48 flex flex-col items-center justify-center min-h-[80vh] text-center">

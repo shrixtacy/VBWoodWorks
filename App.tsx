@@ -49,7 +49,8 @@ function App() {
               <ServicePage
                 title="Educational Furniture"
                 description="Inspiring minds through ergonomic design."
-                backgroundImage="/hero/wood1.png"
+                backgroundImage="/backgrounds/wood1.jpg"
+                woodType="oak"
               />
             }
           />
@@ -59,7 +60,8 @@ function App() {
               <ServicePage
                 title="Office Furniture"
                 description="Productivity meets elegance."
-                backgroundImage="/hero/wood2.png"
+                backgroundImage="/backgrounds/wood2.jpg"
+                woodType="walnut"
               />
             }
           />
@@ -69,7 +71,8 @@ function App() {
               <ServicePage
                 title="Home Furniture"
                 description="Warmth and sophistication for your sanctuary."
-                backgroundImage="/hero/wood3.png"
+                backgroundImage="/backgrounds/wood3.jpg"
+                woodType="teak"
               />
             }
           />
@@ -79,7 +82,8 @@ function App() {
               <ServicePage
                 title="Interior Solutions"
                 description="Holistic spatial transformation."
-                backgroundImage="/hero/wood4.png"
+                backgroundImage="/backgrounds/wood4.jpg"
+                woodType="mahogany"
               />
             }
           />
@@ -89,7 +93,8 @@ function App() {
               <ServicePage
                 title="Artefacts"
                 description="Details that define character."
-                backgroundImage="/hero/wood5.png"
+                backgroundImage="/backgrounds/wood5.jpg"
+                woodType="pine"
               />
             }
           />
